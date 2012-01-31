@@ -9,16 +9,16 @@
     <groupId>org.seamless</groupId>
     <artifactId>parent</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT-bb</version>
 
     <modules>
         <module>util</module>
         <module>xml</module>
-        <module>mock</module>
+<!--         <module>mock</module> -->
         <module>http</module>
-        <module>javadoc</module>
-        <module>swing</module>
-        <module>gwt</module>
+<!--         <module>javadoc</module> -->
+<!--         <module>swing</module> -->
+<!--         <module>gwt</module> -->
     </modules>
 
     <!-- ##################################################################################################### -->
