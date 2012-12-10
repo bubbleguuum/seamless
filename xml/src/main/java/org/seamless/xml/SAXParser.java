@@ -24,6 +24,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 import org.xml.sax.XMLReader;
+import org.xml.sax.helpers.AttributesImpl;
 import org.xml.sax.helpers.DefaultHandler;
 import org.xml.sax.helpers.XMLReaderFactory;
 
@@ -67,6 +68,7 @@ public class SAXParser {
 
     protected XMLReader create() {
         try {
+        	
             if (getSchemaSources() != null) {
                 // Jump through all the hoops and create a validating reader
                 SAXParserFactory factory = SAXParserFactory.newInstance();
@@ -186,7 +188,7 @@ public class SAXParser {
         public void startElement(String uri, String localName, String qName,
                                  Attributes attributes) throws SAXException {
             this.characters = new StringBuilder();
-            this.attributes = attributes;
+            this.attributes = new AttributesImpl(attributes);
             log.finer(getClass().getSimpleName() + " starting: " + localName);
         }
 
@@ -204,7 +206,7 @@ public class SAXParser {
                 switchToParent();
                 return;
             }
-
+            
             log.finer(getClass().getSimpleName() + " ending: " + localName);
         }
 
