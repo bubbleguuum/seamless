@@ -225,5 +225,9 @@ public class MimeType {
         }
         return sb.toString();
     }
+    
+    public String toStringNoParameters() {
+    	return  getType() + "/" + getSubtype();
+    }
 
 }
