@@ -1,21 +1,4 @@
 /*
- * Copyright (C) 2011 4th Line GmbH, Switzerland
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as
- * published by the Free Software Foundation, either version 2 of
- * the License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-
-/*
    Created: 3 November 1999
    Release: $Name:  $
    Version: $Revision: 1.1 $
@@ -268,10 +251,25 @@ public class MD5Crypt {
         return result.toString();
     }
 
-    public static boolean isEqual(String cleanPassword, String cryptedPassword) {
-        String[] split = cryptedPassword.split("\\$");
-        return split.length == 4 &&
-                crypt(cleanPassword, split[2], "$" + split[1] + "$")
-                        .equals(cryptedPassword);
+    public static boolean isEqual(String clear, String encrypted) {
+        return isEqual(clear.toCharArray(), encrypted);
+    }
+
+    public static boolean isEqual(char[] clear, String encrypted) {
+        String[] split = encrypted.split("\\$");
+        if (split.length != 4)
+            return false;
+        char[] a = encrypted.toCharArray();
+        char[] b = crypt(new String(clear), split[2], "$" + split[1] + "$").toCharArray();
+        boolean result = false;
+        if ((a == null) || (b == null))
+            return (a == b);
+        if (a.length == b.length) {
+            boolean equals = true;
+            for (int i = 0; (i < a.length) && equals; i++)
+                equals = (a[i] == b[i]);
+            result = equals;
+        }
+        return result;
     }
 }

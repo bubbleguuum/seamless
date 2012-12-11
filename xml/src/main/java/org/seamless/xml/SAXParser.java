@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 4th Line GmbH, Switzerland
+ * Copyright (C) 2012 4th Line GmbH, Switzerland
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as
@@ -188,7 +188,7 @@ public class SAXParser {
         public void startElement(String uri, String localName, String qName,
                                  Attributes attributes) throws SAXException {
             this.characters = new StringBuilder();
-            this.attributes = new AttributesImpl(attributes);
+            this.attributes = new AttributesImpl(attributes); // see http://docstore.mik.ua/orelly/xml/sax2/ch05_01.htm, section 5.1.1
             log.finer(getClass().getSimpleName() + " starting: " + localName);
         }
 
